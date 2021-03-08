@@ -1,0 +1,24 @@
+
+service: whatsup-proxy
+frameworkVersion: '2'
+
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: ap-south-1
+  memorySize: 128
+  profile: dhruvsaraiya
+
+functions:
+  loginToWhatsup:
+     handler: handler.loginToWhatsup
+     events:
+        - http: 
+            path: loginToWhatsup
+            method: POST
+            cors: true
+     environment:
+       WHATSUP_API_KEY: ${env:WHATSUP_API_KEY}
+       WHATSUP_BASE_URL: ${env:WHATSUP_BASE_URL}
