@@ -21,6 +21,7 @@ function loginToWhatsup(event, context, callback) {
         headers: {
           "Access-Control-Allow-Origin": "*", // Required for CORS support to work
           "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
+          Authorization: true,
         },
         body: JSON.stringify(e.data),
       };
@@ -33,6 +34,7 @@ function loginToWhatsup(event, context, callback) {
         headers: {
           "Access-Control-Allow-Origin": "*", // Required for CORS support to work
           "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
+          Authorization: true,
         },
         body: JSON.stringify({
           message: error.title,

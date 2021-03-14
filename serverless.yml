@@ -1,6 +1,15 @@
 
 service: whatsup-proxy
 frameworkVersion: '2'
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: whatsup-proxy
+    corsAllowHeaders: 'Accept,Content-Type,Authorization,Accept-Encoding,Accept-Language,Connection,Content-Length,Host,Origin,Referer,User-Agent'
+    corsAllowOrigin: '*'
+    httpPort: 4000
 
 useDotenv: true
 provider:
@@ -18,7 +27,21 @@ functions:
         - http: 
             path: loginToWhatsup
             method: POST
-            cors: true
+            cors:
+              origin: '*'
+              headers:
+                - Accept
+                - Content-Type
+                - Authorization
+                - Accept-Encoding
+                - Accept-Language
+                - Connection
+                - Content-Length
+                - Host
+                - Origin
+                - Referer
+                - User-Agent
+              allowCredentials: true
      environment:
        WHATSUP_API_KEY: ${env:WHATSUP_API_KEY}
        WHATSUP_BASE_URL: ${env:WHATSUP_BASE_URL}
