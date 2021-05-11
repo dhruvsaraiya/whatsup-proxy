@@ -7,7 +7,7 @@ plugins:
 custom:
   serverless-offline:
     host: whatsup-proxy
-    corsAllowHeaders: 'Accept,Content-Type,Authorization,Accept-Encoding,Accept-Language,Connection,Content-Length,Host,Origin,Referer,User-Agent'
+    corsAllowHeaders: 'Accept,Content-Type,Authorization'
     corsAllowOrigin: '*'
     httpPort: 4000
 
@@ -21,11 +21,11 @@ provider:
   profile: dhruvsaraiya
 
 functions:
-  loginToWhatsup:
-     handler: handler.loginToWhatsup
+  LoginToWhatsup:
+     handler: handler.LoginToWhatsup
      events:
         - http: 
-            path: loginToWhatsup
+            path: LoginToWhatsup
             method: POST
             cors:
               origin: '*'
@@ -33,15 +33,27 @@ functions:
                 - Accept
                 - Content-Type
                 - Authorization
-                - Accept-Encoding
-                - Accept-Language
-                - Connection
-                - Content-Length
-                - Host
-                - Origin
-                - Referer
-                - User-Agent
-              allowCredentials: true
-     environment:
-       WHATSUP_API_KEY: ${env:WHATSUP_API_KEY}
-       WHATSUP_BASE_URL: ${env:WHATSUP_BASE_URL}
+  GenerateOtp:
+     handler: handler.GenerateOtp
+     events:
+        - http: 
+            path: GenerateOtp
+            method: POST
+            cors:
+              origin: '*'
+              headers:
+                - Accept
+                - Content-Type
+                - Authorization
+  ReLoginToWhatsup:
+     handler: handler.ReLoginToWhatsup
+     events:
+        - http: 
+            path: ReLoginToWhatsup
+            method: POST
+            cors:
+              origin: '*'
+              headers:
+                - Accept
+                - Content-Type
+                - Authorization
